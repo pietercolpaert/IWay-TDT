@@ -26,7 +26,7 @@ class TrafficEvent extends AResource{
      }
 
      public static function getRequiredParameters(){
-	 	return array("region");
+	 	return array("lang","region");
      }
 
      public function setParameter($key,$val){

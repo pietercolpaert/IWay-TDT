@@ -134,7 +134,7 @@ class Geocoder {
 
     public static function geocodeData($data, $region, $language) {
 
-        if($region=="walloonia") {
+        if($region=="wallonia") {
 	     $data = explode(" ", $data);
 	     if($language == "EN" || $language == "NL" || $language == "DE"){
 		$highway = $data[4] . " " . $data[5] ." " . $data[6] ." " . (isset($data[7]) ? $data[7] : '');
