@@ -26,7 +26,7 @@ class TrafficEvent extends AResource{
      }
 
      public static function getRequiredParameters(){
-	 	return array();
+	 	return array("region");
      }
 
      public function setParameter($key,$val){
@@ -85,8 +85,9 @@ class TrafficEvent extends AResource{
      }
 
     private function getData(){
+	$scrapeUrl = "";
 	switch($this->region){
-		case "walloonia" : 
+		case "wallonia" : 
 			$scrapeUrl = 'http://trafiroutes.wallonie.be/trafiroutes/Evenements_'.strtoupper($this->lang).'.rss';
 
 			break;
@@ -112,7 +113,7 @@ class TrafficEvent extends AResource{
 	 $i = 0;
 	
 	 switch($this->region){
-		case "walloonia" : 
+		case "wallonia" : 
 			
 			$xml = new SimpleXMLElement($data);
 			foreach($xml->channel->item as $event){
@@ -249,7 +250,7 @@ class TrafficEvent extends AResource{
      	  $months = array("janv"=>1, "fevr"=>2, "mars"=>3, "avri"=>4, "mai"=>5, "juin"=>6, "juil"=>7, "aout"=>8, "sept"=>9, "octo"=>10, "nove"=>11, "dece"=>12);
      	  switch($this->region){
      	  
-     	  		case "walloonia" : 
+     	  		case "wallonia" : 
      	  				//sam., 10 sept. 2011 23:57:43 +0200
      	  			  preg_match("/(\w+)., (\d+) (\w+). (\d+) ((\d\d):(\d\d):(\d\d)) +(\d+)?/",$str,$match);
 
@@ -292,7 +293,7 @@ class TrafficEvent extends AResource{
 		$type = "OTHER";		
 		switch($this->region){
 			
-			case "walloonia" :
+			case "wallonia" :
 				if(!(stripos($description,"travaux")===false) || !(stripos($description,"chantier")===false)) {
 				    $type = "WORKS";
 				}else if(!(stripos($description,"accident")===false) || !(stripos($description,"incident")===false) || !(stripos($description,"Perte")===false)

@@ -3,7 +3,7 @@
 	//walloonia
 	for($i = 0; $i<=50; $i++){
 		$file = 'http://trafiroutes.wallonie.be/images_uploaded/cameras/image'.$i.'.jpg';
-		$newfile = '../images/walloonia/camera_'.$i.'.jpg';
+		$newfile = 'images/wallonia/camera_'.$i.'.jpg';
 		copy($file, $newfile);
 	}
 	//flanders
@@ -15,7 +15,7 @@
 	//Listage des liens trouvés 
 	foreach ($resultat[1] as $liens) { 
 		$file = 'http://www.verkeerscentrum.be/camera-images/Camera_'.$liens;
-		$newfile = '../images/flanders/image_antwerpen_'.$j.'.jpg';
+		$newfile = 'images/flanders/image_antwerpen_'.$j.'.jpg';
 		copy($file, $newfile);
 		$j++;
 	}
@@ -29,7 +29,7 @@
 	//Listage des liens trouvés 
 	foreach ($resultat[1] as $liens) { 
 		$file = 'http://www.verkeerscentrum.be/camera-images/Camera_'.$liens;
-		$newfile = '../images/flanders/image_gand_'.$l.'.jpg';
+		$newfile = 'images/flanders/image_gand_'.$l.'.jpg';
 		copy($file, $newfile);
 		$l++;
 	}
@@ -43,7 +43,7 @@
 	//Listage des liens trouvés 
 	foreach ($resultat[1] as $liens) { 
 		$file = 'http://www.verkeerscentrum.be/camera-images/Camera_'.$liens;
-		$newfile = '../images/flanders/image_lummen_'.$m.'.jpg';
+		$newfile = 'images/flanders/image_lummen_'.$m.'.jpg';
 		copy($file, $newfile);
 		$m++;
 	}
@@ -60,7 +60,7 @@
 	//Listage des liens trouvés 
 	foreach ($resultat[1] as $liens) { 
 		$file = 'http://www.verkeerscentrum.be/camera-images/Camera_'.$liens;
-		$newfile = '../images/brussels/image_brussel_'.$k.'.jpg';
+		$newfile = 'images/brussels/image_brussel_'.$k.'.jpg';
 		copy($file, $newfile);
 		$k++;
 	}
@@ -75,7 +75,7 @@
 	//Listage des liens trouvés 
 	foreach ($resultat[1] as $liens) { 
 		$file = 'http://www.bruxellesmobilite.irisnet.be/static/cameras/Cam'.$liens;
-		$newfile = '../images/brussels/image_ringbxl_'.$n.'.jpg';
+		$newfile = 'images/brussels/image_ringbxl_'.$n.'.jpg';
 		copy($file, $newfile);
 		$n++;
 	}
