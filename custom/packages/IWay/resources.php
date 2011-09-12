@@ -11,7 +11,7 @@ class IWay{
 	  "TrafficEvent",
 	  "Radar",
 	  "Camera",
-	  "Parking"
+	//  "Parking"
 	  );
 }
 
