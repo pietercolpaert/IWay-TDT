@@ -75,7 +75,7 @@ class Geocoder {
 
             $base_url = "http://maps.google.com/maps/geo?output=xml&key=ABQIAAAAnfs7bKE82qgb3Zc2YyS-oBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSySz_REpPq-4WZA27OwgbtyR3VcA";
             $request_url = $base_url . "&q=" . urlencode(utf8_encode($address));
-            $xml = simplexml_load_file($request_url) or die("url not loading");
+            $xml = TDT::HttpRequest($request_url);
 
             $status = $xml->Response->Status->code;
 
@@ -134,7 +134,7 @@ class Geocoder {
 
     public static function geocodeData($data, $region, $language) {
 
-        if($region=="wallonia") {
+        if($region=="walloonia") {
 	     $data = explode(" ", $data);
 	     if($language == "EN" || $language == "NL" || $language == "DE"){
 		$highway = $data[4] . " " . $data[5] ." " . $data[6] ." " . (isset($data[7]) ? $data[7] : '');
@@ -151,9 +151,50 @@ class Geocoder {
         }
         else if($region=="flanders") {
 
-	    	$data = explode("->", $data);
-			return Geocoder::geocode("Belgium, " . $data[0]);
-	
+	    $data = str_replace(array("grens","(",")","hoflaan"), " ", $data);
+	    
+
+            $tab = explode("->", $data);
+	  
+            if(count($tab) >= 2){
+		    $tab = preg_split('/(\d+)/', $tab[0], -1, PREG_SPLIT_OFFSET_CAPTURE);
+		
+		    if(isset($tab[2][0]) && $tab[2][0] != ''){		
+	               	 if($coords = Geocoder::isGeocoded($tab[2][0])){
+				return $coords;
+			 }else{
+			 	return Geocoder::geocode("Belgium, " . $tab[2][0]);
+			 }
+		    }else{
+			if($coords = Geocoder::isGeocoded($tab[1][0])){
+				return $coords;
+			 }else{
+			 	return Geocoder::geocode("Belgium, " . $tab[1][0]);
+			 }
+	   	    }
+            }else{
+		 $tab = explode(" ", $data);
+		 if($coords = Geocoder::isGeocoded($tab[1])){
+			return $coords;
+		 }else{
+		 	return Geocoder::geocode("Belgium, " . $tab[1]);
+		 }
+	    }
+        }
+        else if($region=="federal"){
+             if(strstr($data," hauteur de") != false) {
+                $tab = explode(" hauteur de", $data);
+                $tab = explode(" ", $tab[1]);
+		if($coords = Geocoder::isGeocoded($tab[1])){
+			return $coords;
+		 }else{
+		 	return Geocoder::geocode("Belgium, " . $tab[1]);
+		 }
+                
+            }
+            else {
+                return array("lng" => 0,"lat" => 0);
+            }
         }
         else{
             throw new Exception("Wrong region parameter, please retry.");
