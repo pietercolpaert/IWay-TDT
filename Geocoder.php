@@ -76,7 +76,7 @@ class Geocoder {
             $base_url = "http://maps.google.com/maps/geo?output=xml&key=ABQIAAAAnfs7bKE82qgb3Zc2YyS-oBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSySz_REpPq-4WZA27OwgbtyR3VcA";
             $request_url = $base_url . "&q=" . urlencode(utf8_encode($address));
             $data = TDT::HttpRequest($request_url);
-			$xml = simplexml_load_string($data);
+			$xml = simplexml_load_string($data->data);
             $status = $xml->Response->Status->code;
 
             //successful geocode
